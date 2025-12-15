@@ -9,3 +9,18 @@ generator client {
 datasource db {
   provider = "sqlite"
 }
+
+model User {
+  id Int @id @default(autoincrement())
+  email String @unique
+  name String?
+  articles Article[]
+}
+
+model Article{
+  id Int @id @default(autoincrement())
+  title String
+  body String?
+  authorId Int
+  auther User @relation(fields: [authorId], references: [id])
+}
